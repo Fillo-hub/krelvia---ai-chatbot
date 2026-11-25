@@ -1,6 +1,6 @@
+import dynamic from "next/dynamic";
 import { toast } from "sonner";
 import { Artifact } from "@/components/chat/create-artifact";
-import { DiffView } from "@/components/chat/diffview";
 import { DocumentSkeleton } from "@/components/chat/document-skeleton";
 import {
   ClockRewind,
@@ -10,9 +10,17 @@ import {
   RedoIcon,
   UndoIcon,
 } from "@/components/chat/icons";
-import { Editor } from "@/components/chat/text-editor";
 import type { Suggestion } from "@/lib/db/schema";
 import { getSuggestions } from "../actions";
+
+const DiffView = dynamic(
+  () => import("@/components/chat/diffview").then((mod) => mod.DiffView),
+  { ssr: false }
+);
+const Editor = dynamic(
+  () => import("@/components/chat/text-editor").then((mod) => mod.Editor),
+  { ssr: false }
+);
 
 type TextArtifactMetadata = {
   suggestions: Suggestion[];

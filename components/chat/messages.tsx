@@ -1,5 +1,6 @@
 import type { UseChatHelpers } from "@ai-sdk/react";
 import { ArrowDownIcon } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef } from "react";
 import { useMessages } from "@/hooks/use-messages";
 import type { Vote } from "@/lib/db/schema";
@@ -7,7 +8,15 @@ import type { ChatMessage } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useDataStream } from "./data-stream-provider";
 import { Greeting } from "./greeting";
-import { PreviewMessage, ThinkingMessage } from "./message";
+
+const PreviewMessage = dynamic(
+  () => import("./message").then((mod) => mod.PreviewMessage),
+  { ssr: false }
+);
+const ThinkingMessage = dynamic(
+  () => import("./message").then((mod) => mod.ThinkingMessage),
+  { ssr: false }
+);
 
 type MessagesProps = {
   addToolApprovalResponse: UseChatHelpers<ChatMessage>["addToolApprovalResponse"];

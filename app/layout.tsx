@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  maximumScale: 1,
+  initialScale: 1,
+  width: "device-width",
 };
 
 const geist = Geist({

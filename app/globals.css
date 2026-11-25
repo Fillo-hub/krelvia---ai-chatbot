@@ -54,26 +54,26 @@
   --card-foreground: oklch(0.16 0.02 262);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.16 0.02 262);
-  --primary: oklch(0.52 0.21 264);
+  --primary: oklch(0.46 0.21 264);
   --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.95 0.012 264);
-  --secondary-foreground: oklch(0.32 0.04 264);
+  --secondary-foreground: oklch(0.28 0.04 264);
   --muted: oklch(0.955 0.008 262);
-  --muted-foreground: oklch(0.48 0.02 262);
+  --muted-foreground: oklch(0.41 0.025 262);
   --accent: oklch(0.945 0.02 264);
   --accent-foreground: oklch(0.2 0.04 264);
-  --destructive: oklch(0.57 0.2 25);
+  --destructive: oklch(0.52 0.2 25);
   --border: oklch(0.9 0.012 262);
   --input: oklch(0.9 0.012 262);
-  --ring: oklch(0.55 0.2 264);
+  --ring: oklch(0.5 0.2 264);
   --chart-1: oklch(0.55 0.22 264);
   --chart-2: oklch(0.62 0.16 184);
   --chart-3: oklch(0.65 0.18 145);
   --chart-4: oklch(0.76 0.18 84);
   --chart-5: oklch(0.64 0.2 310);
   --sidebar: oklch(0.968 0.008 262);
-  --sidebar-foreground: oklch(0.3 0.02 262);
-  --sidebar-primary: oklch(0.52 0.21 264);
+  --sidebar-foreground: oklch(0.26 0.02 262);
+  --sidebar-primary: oklch(0.46 0.21 264);
   --sidebar-primary-foreground: oklch(0.99 0 0);
   --sidebar-accent: oklch(0.52 0.21 264 / 0.08);
   --sidebar-accent-foreground: oklch(0.2 0.04 264);
@@ -106,7 +106,7 @@
   --secondary: oklch(0.23 0.02 262);
   --secondary-foreground: oklch(0.84 0.015 262);
   --muted: oklch(0.21 0.018 262);
-  --muted-foreground: oklch(0.68 0.02 262);
+  --muted-foreground: oklch(0.75 0.015 262);
   --accent: oklch(0.25 0.03 264);
   --accent-foreground: oklch(0.96 0.01 264);
   --destructive: oklch(0.68 0.18 25);
@@ -273,11 +273,12 @@ textarea:focus-visible {
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
+  0%,
   100% {
-    background-position: 200% 0;
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
   }
 }
 
@@ -321,21 +322,19 @@ textarea:focus-visible {
 @keyframes glow-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 oklch(0.55 0.12 250 / 0%);
+    opacity: 0.85;
   }
   50% {
-    box-shadow: 0 0 0 3px oklch(0.55 0.12 250 / 8%);
+    opacity: 1;
   }
 }
 
 @keyframes subtle-lift {
   from {
     transform: translateY(0);
-    box-shadow: var(--shadow-card);
   }
   to {
     transform: translateY(-1px);
-    box-shadow: var(--shadow-float);
   }
 }
 

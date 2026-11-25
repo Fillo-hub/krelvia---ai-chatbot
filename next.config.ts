@@ -26,6 +26,13 @@ const nextConfig: NextConfig = {
     appNewScrollHandler: true,
     cachedNavigations: true,
     inlineCss: true,
+    optimizePackageImports: [
+      "lucide-react",
+      "date-fns",
+      "framer-motion",
+      "motion",
+      "radix-ui",
+    ],
     prefetchInlining: true,
     turbopackFileSystemCacheForDev: true,
   },

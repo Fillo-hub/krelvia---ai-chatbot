@@ -482,6 +482,7 @@ function PureMultimodalInput({
         )}
 
       <input
+        aria-label="Carica file allegati"
         className="pointer-events-none fixed -top-4 -left-4 size-0.5 opacity-0"
         multiple
         onChange={handleFileChange}
@@ -533,7 +534,8 @@ function PureMultimodalInput({
           </div>
         )}
         <PromptInputTextarea
-          className="min-h-20 text-sm leading-relaxed px-4 pt-3.5 pb-1.5 placeholder:text-muted-foreground/60"
+          aria-label="Messaggio da inviare"
+          className="min-h-20 text-sm leading-relaxed px-4 pt-3.5 pb-1.5 placeholder:text-muted-foreground"
           data-testid="multimodal-input"
           onChange={handleInput}
           onKeyDown={handleTextareaKeyDown}
@@ -562,11 +564,12 @@ function PureMultimodalInput({
             <StopButton setMessages={setMessages} stop={stop} />
           ) : (
             <PromptInputSubmit
+              aria-label="Invia messaggio"
               className={cn(
                 "h-7 w-7 rounded-xl transition-all duration-200",
                 input.trim()
                   ? "bg-foreground text-background hover:opacity-85 active:scale-95"
-                  : "bg-muted text-muted-foreground/25 cursor-not-allowed"
+                  : "bg-muted text-muted-foreground cursor-not-allowed"
               )}
               data-testid="send-button"
               disabled={!input.trim() || uploadQueue.length > 0}
@@ -665,11 +668,12 @@ function PureAttachmentsButton({
 
   return (
     <Button
+      aria-label="Allega file"
       className={cn(
-        "h-7 w-7 rounded-lg border border-border/40 p-1 transition-colors",
+        "h-7 w-7 rounded-lg border border-border/60 p-1 transition-colors",
         hasVision
           ? "text-foreground hover:border-border hover:text-foreground"
-          : "text-muted-foreground/30 cursor-not-allowed"
+          : "text-muted-foreground cursor-not-allowed"
       )}
       data-testid="attachments-button"
       disabled={status !== "ready" || !hasVision}
@@ -823,7 +827,10 @@ function PureModelSelectorCompact({
         </Button>
       </ModelSelectorTrigger>
       <ModelSelectorContent commandDefaultValue={selectedModel.id}>
-        <ModelSelectorInput placeholder="Cerca modello..." />
+        <ModelSelectorInput
+          aria-label="Cerca modello"
+          placeholder="Cerca modello..."
+        />
         <ModelSelectorList>
           {(() => {
             const curatedIds = new Set(chatModels.map((m) => m.id));
@@ -932,7 +939,8 @@ function PureStopButton({
 
   return (
     <Button
-      className="h-7 w-7 rounded-xl bg-foreground p-1 text-background transition-all duration-200 hover:opacity-85 active:scale-95 disabled:bg-muted disabled:text-muted-foreground/25 disabled:cursor-not-allowed"
+      aria-label="Interrompi generazione"
+      className="h-7 w-7 rounded-xl bg-foreground p-1 text-background transition-all duration-200 hover:opacity-85 active:scale-95 disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed"
       data-testid="stop-button"
       onClick={handleClick}
     >

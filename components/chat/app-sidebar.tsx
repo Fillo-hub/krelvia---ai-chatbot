@@ -113,6 +113,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <SidebarMenuButton
+                      aria-label="Apri barra laterale"
                       className="pointer-events-none absolute inset-0 size-8 opacity-0 group-data-[collapsible=icon]:pointer-events-auto group-data-[collapsible=icon]:group-hover/logo:opacity-100"
                       onClick={handleToggleSidebar}
                     >
@@ -125,7 +126,10 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                 </Tooltip>
               </div>
               <div className="group-data-[collapsible=icon]:hidden">
-                <SidebarTrigger className="text-sidebar-foreground/60 transition-colors duration-150 hover:text-sidebar-foreground" />
+                <SidebarTrigger
+                  aria-label="Chiudi o apri barra laterale"
+                  className="text-sidebar-foreground/85 transition-colors duration-150 hover:text-sidebar-foreground"
+                />
               </div>
             </SidebarMenuItem>
           </SidebarMenu>
@@ -153,7 +157,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                 {user ? (
                   <SidebarMenuItem>
                     <SidebarMenuButton
-                      className="rounded-lg text-sidebar-foreground/60 transition-colors duration-150 hover:bg-destructive/10 hover:text-destructive"
+                      className="rounded-lg text-sidebar-foreground/85 transition-colors duration-150 hover:bg-destructive/10 hover:text-destructive"
                       onClick={handleShowDeleteAllDialog}
                       tooltip="Elimina tutte le chat"
                     >

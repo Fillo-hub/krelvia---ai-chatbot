@@ -252,8 +252,14 @@ export function QuickToolsDialog({
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div className="space-y-1.5">
-                <Label className="text-xs text-muted-foreground">Importo (€)</Label>
+                <Label
+                  className="text-xs text-muted-foreground"
+                  htmlFor="iva-amount"
+                >
+                  Importo (€)
+                </Label>
                 <Input
+                  id="iva-amount"
                   inputMode="decimal"
                   onChange={(e) => setIvaAmount(e.target.value)}
                   placeholder="1000"
@@ -261,8 +267,14 @@ export function QuickToolsDialog({
                 />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-xs text-muted-foreground">Sconto (%)</Label>
+                <Label
+                  className="text-xs text-muted-foreground"
+                  htmlFor="iva-discount"
+                >
+                  Sconto (%)
+                </Label>
                 <Input
+                  id="iva-discount"
                   inputMode="decimal"
                   onChange={(e) => setDiscountPct(e.target.value)}
                   placeholder="0"
@@ -381,6 +393,7 @@ export function QuickToolsDialog({
                 </span>
                 <div className="flex gap-1.5">
                   <Button
+                    aria-label="Rigenera password"
                     onClick={regeneratePassword}
                     size="sm"
                     type="button"
@@ -483,11 +496,15 @@ export function QuickToolsDialog({
         {tab === "dev" && (
           <div className="space-y-3">
             <div className="space-y-1.5">
-              <Label className="text-xs text-muted-foreground">
+              <Label
+                className="text-xs text-muted-foreground"
+                htmlFor="dev-input"
+              >
                 Input JSON o testo Base64
               </Label>
               <Textarea
                 className="min-h-[100px] font-mono text-xs"
+                id="dev-input"
                 onChange={(e) => setDevInput(e.target.value)}
                 value={devInput}
               />
@@ -540,6 +557,7 @@ export function QuickToolsDialog({
         {tab === "text" && (
           <div className="space-y-3">
             <Textarea
+              aria-label="Testo da analizzare"
               className="min-h-[120px] text-sm"
               onChange={(e) => setTextInput(e.target.value)}
               placeholder="Incolla o scrivi qui il testo da analizzare..."

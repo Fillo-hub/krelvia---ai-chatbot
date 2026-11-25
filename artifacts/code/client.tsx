@@ -1,10 +1,9 @@
+import dynamic from "next/dynamic";
 import { useCallback } from "react";
 import { toast } from "sonner";
-import { CodeEditor } from "@/components/chat/code-editor";
-import {
-  Console,
-  type ConsoleOutput,
-  type ConsoleOutputContent,
+import type {
+  ConsoleOutput,
+  ConsoleOutputContent,
 } from "@/components/chat/console";
 import { Artifact } from "@/components/chat/create-artifact";
 import {
@@ -16,6 +15,15 @@ import {
   UndoIcon,
 } from "@/components/chat/icons";
 import { generateUUID } from "@/lib/utils";
+
+const CodeEditor = dynamic(
+  () => import("@/components/chat/code-editor").then((mod) => mod.CodeEditor),
+  { ssr: false }
+);
+const Console = dynamic(
+  () => import("@/components/chat/console").then((mod) => mod.Console),
+  { ssr: false }
+);
 
 const OUTPUT_HANDLERS = {
   basic: `
@@ -115,6 +123,17 @@ export const codeArtifact = new Artifact<"code", Metadata>({
         }));
 
         try {
+          if (!("loadPyodide" in globalThis)) {
+            await new Promise<void>((resolve, reject) => {
+              const script = document.createElement("script");
+              script.src =
+                "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js";
+              script.onload = () => resolve();
+              script.onerror = () =>
+                reject(new Error("Impossibile caricare Pyodide"));
+              document.head.appendChild(script);
+            });
+          }
           // @ts-expect-error - loadPyodide is not defined
           const currentPyodideInstance = await globalThis.loadPyodide({
             indexURL: "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/",
